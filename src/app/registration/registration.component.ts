@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -7,22 +8,37 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+  
+  registrationForm: FormGroup;
+  submitted = false;
 
-  registrationForm = this.formBuilder.group({
-    username: '',
-    password: ''
-  });
+ 
 
   ngOnInit(): void {
   }
 
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private router: Router) {
+    this.registrationForm = this.formBuilder.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      username: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+    // convenience getter for easy access to form fields
+get f() { return this.registrationForm.controls; }
 
   onSubmit(): void {
-    // Process checkout data here
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.registrationForm.invalid) {
+      return;
+  }
     console.warn('Your order has been submitted', this.registrationForm.value);
     this.registrationForm.reset();
+    this.router.navigate(['registration-confirm']);
   }
 
 }
