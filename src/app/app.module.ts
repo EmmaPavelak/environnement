@@ -12,6 +12,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { RegistrationConfirmComponent } from './registration/registration-confirm/registration-confirm.component';
 import { ContactComponent } from './contact/contact.component';
+import { TermsComponent } from './terms/terms.component';
+import { UsersService } from './users/users.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -23,14 +27,17 @@ import { ContactComponent } from './contact/contact.component';
     RegistrationComponent,
     ForgotPasswordComponent,
     RegistrationConfirmComponent,
-    ContactComponent
+    ContactComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule, ReactiveFormsModule,
+    HttpClientModule
+    
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

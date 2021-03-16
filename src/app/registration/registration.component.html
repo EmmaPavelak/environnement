@@ -11,27 +11,28 @@
     </div>
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
         <div class="form-group"><label class="form-label" for="name">Prénom</label><input type="text"
-            class="form-control form-control-lg" id="name" placeholder="Entrer votre prénom" formControlName="firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" required>
+            class="form-control form-control-lg" id="firstname" placeholder="Entrer votre prénom" formControlName="firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" required>
             <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
-                <div *ngIf="f.firstname.errors.required">Prénom invalide</div>
+                <div *ngIf="f.firstname.errors.required">Prénom non rempli</div>
             </div>
         </div>
         <div class="form-group"><label class="form-label" for="name">Nom</label><input type="text"
-            class="form-control form-control-lg" id="name" placeholder="Entrer votre nom" formControlName="lastname" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" required>
+            class="form-control form-control-lg" id="lastname" placeholder="Entrer votre nom" formControlName="lastname" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" required>
             <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-                <div *ngIf="f.lastname.errors.required">Nom invalide</div>
+                <div *ngIf="f.lastname.errors.required">Nom non rempli</div>
             </div>
         </div>
         <div class="form-group"><label class="form-label" for="name">Nom d'utilisateur</label><input type="text"
-                class="form-control form-control-lg" id="name" placeholder="Entrer votre nom d'utilisateur" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
+                class="form-control form-control-lg" id="username" placeholder="Entrer votre nom d'utilisateur" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
                 <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                    <div *ngIf="f.username.errors.required">Nom d'utilisateur invalide</div>
+                    <div *ngIf="f.username.errors.required">Nom d'utilisateur non rempli</div>
                 </div>
             </div>
         <div class="form-group"><label class="form-label" for="email">Email</label><input type="email"
                 class="form-control form-control-lg" id="email" placeholder="Entrer votre email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.required">Email invalide</div>
+                    <div *ngIf="f.email.errors.required">Email non rempli</div>
+                    <div *ngIf="f.email.errors.email" class="text-danger">Email invalide</div>
                 </div>
         </div>
         <div class="form-group"><label class="form-label" for="password">Mot de passe</label>
@@ -40,7 +41,19 @@
                         class="passcode-icon icon-hide icon ni ni-eye-off"></em></a><input type="password"
                     class="form-control form-control-lg" id="password" placeholder="Entrer votre mot de passe" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Mot de passe invalide</div>
+                        <div *ngIf="f.password.errors.required">Mot de passe non rempli</div>
+                        <div *ngIf="f.password.errors.minlenght">Le mot de passe doit contenir 6 caractères au minimum</div>
+                    </div>
+                </div>
+        </div>
+        <div class="form-group"><label class="form-label" for="confirmPassword">Confirmation mot de passe</label>
+            <div class="form-control-wrap"><a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch"
+                    data-target="confirmPassword"><em class="passcode-icon icon-show icon ni ni-eye"></em><em
+                        class="passcode-icon icon-hide icon ni ni-eye-off"></em></a><input type="password"
+                    class="form-control form-control-lg" id="confirmPassword" placeholder="Entrer votre mot de passe" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" required>
+                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirmPassword.errors.required">Mot de passe non rempli</div>
+                        <div *ngIf="f.confirmPassword.errors.mustMatch">Les mots de passe sont différents</div>
                     </div>
                 </div>
         </div>

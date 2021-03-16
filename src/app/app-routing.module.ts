@@ -6,6 +6,7 @@ import { ForgotPasswordComponent } from './login/forgot-password/forgot-password
 import { LoginComponent } from './login/login.component';
 import { RegistrationConfirmComponent } from './registration/registration-confirm/registration-confirm.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'registration-confirm', component: RegistrationConfirmComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'terms', component: TermsComponent },
    /*{ path: 'not-found', component: FourOhFourComponent },*/
   { path: '**', redirectTo: '' }
 ];

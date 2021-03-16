@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
 
-constructor(private formBuilder: FormBuilder, private router: Router) {
+constructor(private formBuilder: FormBuilder, private router: Router,private userService: UsersService) {
   this.loginForm = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required] //, Validators.minLength(6)
@@ -24,6 +25,22 @@ constructor(private formBuilder: FormBuilder, private router: Router) {
 // convenience getter for easy access to form fields
 get f() { return this.loginForm.controls; }
 
+login(){
+  this.userService.loginUser(this.loginForm.value).subscribe(
+    res => {
+      console.log(res);
+      console.log("cool");
+      //this.toastr.success('Votre compte a été créer avec succès.', 'Success');
+      this.router.navigate(['registration-confirm']);
+    },
+    err => {
+      console.log('Error occured:' , err);
+     // this.toastr.error(err.message, 'Error occured');
+    }
+  );
+
+}
+
   onSubmit(): void {
     this.submitted = true;
     // stop here if form is invalid
@@ -31,7 +48,8 @@ get f() { return this.loginForm.controls; }
       return;
   }
     console.warn('Your order has been submitted', this.loginForm.value);
-    this.loginForm.reset();
-    this.router.navigate(['home']);
+    this.login();
+     //this.loginForm.reset();
+    //this.router.navigate(['home']);
   }
 }
