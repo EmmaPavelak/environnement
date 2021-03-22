@@ -12,6 +12,7 @@ import { MustMatch } from '../_helpers/must-match';
 })
 export class RegistrationComponent implements OnInit {
   
+  registerOK = true;
   registrationForm: FormGroup;
   submitted = false;
 
@@ -45,6 +46,7 @@ saveUser(){
       this.router.navigate(['registration-confirm']);
     },
     err => {
+      this.registerOK = false;
       console.log('Error occured:' , err);
      // this.toastr.error(err.message, 'Error occured');
     }

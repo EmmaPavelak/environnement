@@ -10,6 +10,8 @@ import { UsersService } from '../users/users.service';
 })
 export class LoginComponent implements OnInit {
 
+  connectOK =true;
+
   loginForm: FormGroup;
   submitted = false;
 
@@ -35,6 +37,7 @@ login(){
     },
     err => {
       console.log('Error occured:' , err);
+      this.connectOK =false;
      // this.toastr.error(err.message, 'Error occured');
     }
   );
