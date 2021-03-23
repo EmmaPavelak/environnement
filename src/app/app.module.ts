@@ -16,6 +16,9 @@ import { TermsComponent } from './terms/terms.component';
 import { UsersService } from './users/users.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { OfferTreeComponent } from './offer-tree/offer-tree.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { ToastrModule } from 'ngx-toastr';
     ForgotPasswordComponent,
     RegistrationConfirmComponent,
     ContactComponent,
-    TermsComponent
+    TermsComponent,
+    MyAccountComponent,
+    OfferTreeComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
