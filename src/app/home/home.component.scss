@@ -1,0 +1,20 @@
+.search-bar {
+  width: 100%;
+  //   background: #000;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  text-align: center;
+}
+.search-bar img {
+  max-width: 300px;
+}
+.search-bar input[type="text"] {
+  font-size: 1.3em;
+  padding: 1.3em;
+}
+.search-bar input[type="submit"] {
+  font-size: 1.2em;
+  padding: 1.2em;
+}
