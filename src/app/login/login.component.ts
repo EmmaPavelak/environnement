@@ -33,7 +33,7 @@ login(){
       console.log(res);
       console.log("cool");
       //this.toastr.success('Votre compte a été créer avec succès.', 'Success');
-      this.router.navigate(['registration-confirm']);
+      this.router.navigate(['home']);
     },
     err => {
       console.log('Error occured:' , err);

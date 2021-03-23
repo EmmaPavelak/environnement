@@ -10,6 +10,8 @@ import { TermsComponent } from './terms/terms.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { OfferTreeComponent } from './offer-tree/offer-tree.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { EcologicalFootprintComponent } from './ecological-footprint/ecological-footprint.component';
+import { TestResultComponent } from './test-result/test-result.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'my-account', component: MyAccountComponent },
   { path: 'offer-tree', component: OfferTreeComponent },
   { path: 'edit-user', component: EditUserComponent },
+  { path: 'ecological-footprint', component: EcologicalFootprintComponent },
+  { path: 'test-result', component: TestResultComponent },
    /*{ path: 'not-found', component: FourOhFourComponent },*/
   { path: '**', redirectTo: '' }
 ];

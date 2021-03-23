@@ -1,0 +1,167 @@
+<div class="nk-content ">
+    <div class="nk-block p-4 ">
+    <div class="nk-block-head">
+        <div class="nk-block-head-content">
+            <h4 class="title nk-block-title">Calcule ton empreinte écologique</h4>
+            <div class="nk-block-des">
+                <p> Tu désires connaître ton empreinte écologique ? Réponds le plus honnêtement possible aux questions suivantes. Ce test te donnera une idée de ton empreinte écologique. Cela t'aidera à déterminer si tu dois modifier certains comportements afin de diminuer ton impact sur l’environnement. </p>
+            </div>
+        </div>
+    </div>
+    <div class="card card-preview">
+        <div class="card-inner">
+            <form  [formGroup]="testForm" (ngSubmit)="onSubmit()">
+            <div class="preview-block"><span class="preview-title-lg overline-title">Habitation</span>
+                <div class="row gy-4">
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="form-label" for="default-01">Combien de personnes vivent chez toi?</label>
+                            <div class="form-control-wrap"><input type="text" class="form-control" id="default-01"
+                                    placeholder="2"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="form-label" for="default-05">Combien y a-t-il de robinets et de toilettes chez toi (salle de bain, cuisine, salle de lavage, dehors, etc.)?</label>
+                            <div class="form-control-wrap">
+                                <input
+                                    type="text" class="form-control" id="default-05" placeholder="3">
+                            </div>
+                        </div>
+                    </div>                 
+                    <div class="col-sm-6">                    
+                        <div class="form-group"><label class="form-label" for="default-06">	
+                            Comment ton logement est-il chauffé ? </label>
+                            <div class="form-control-wrap ">
+                                <div class="form-control-select"><select class="form-control" id="default-02">
+                                        <option value="default_option">Gaz naturel</option>
+                                        <option value="option_select_name">Electricité</option>
+                                        <option value="option_select_name">Bois</option>
+                                        <option value="option_select_name">Energie renouvelable (solaire, éolienne...)</option>
+                                    </select></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="form-label" for="default-07">Dans quel type d'habitation vis-tu?</label>
+                            <div class="form-control-wrap">
+                                <div class="form-control-select-multiple"><select class="custom-select" id="default-07"
+                                        multiple="">
+                                        <option value="option_select0">Appartement</option>
+                                        <option value="option_select1">Maison jumelée</option>
+                                        <option value="option_select2">Maison individuelle</option>                                     
+                                    </select></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="preview-hr"><span class="preview-title-lg overline-title">Transports</span>
+                <div class="row gy-4">
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="form-label" for="default-01">Combien de fois par semaine utilises-tu les transports en commun ?</label>
+                            <div class="form-control-wrap"><input type="text" class="form-control" id="default-03"
+                                    placeholder="2"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="form-label" for="default-05">Combien de kilomètres par semaine effectues-tu en voiture individuelle?</label>
+                            <div class="form-control-wrap">
+                                <input
+                                    type="text" class="form-control" id="default-04" placeholder="1">
+                            </div>
+                        </div>
+                    </div>                 
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="form-label" for="default-06">Combien de fois par an prends-tu l'avion?</label>
+                            <div class="form-control-wrap">
+                                <input
+                                    type="text" class="form-control" id="default-06" placeholder="1">
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <hr class="preview-hr"><span class="preview-title-lg overline-title">Alimentation </span>
+                <div class="row gy-4">
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="form-label" for="default-08">Combien de fois par semaine manges-tu de la viande ou du poisson?</label>
+                            <div class="form-control-wrap"><input type="text" class="form-control" id="default-08"
+                                    placeholder="2"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="form-label" for="default-09">Combien de repas cuisinés industriellement manges-tu par semaine ?</label>
+                            <div class="form-control-wrap">
+                                <input
+                                    type="text" class="form-control" id="default-09" placeholder="1">
+                            </div>
+                        </div>
+                    </div>                 
+                    <div class="col-sm-6">                    
+                        <div class="form-group"><label class="form-label" for="default-10">	
+                            Achètes-tu autant que possible des produits locaux ? </label>
+                            <div class="form-control-wrap ">
+                                <div class="form-control-select"><select class="form-control" id="default-10">
+                                        <option value="default_option">Oui</option>
+                                        <option value="option_select_name">Non</option>
+                                        <option value="option_select_name">Parfois</option>
+                                        <option value="option_select_name">Rarement</option>
+                                    </select></div>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+                <hr class="preview-hr"><span class="preview-title-lg overline-title">Déchets </span>
+                <div class="row gy-4">
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="form-label" for="default-01">Combien de sacs à ordure (30L) jetes-tu par semaine?</label>
+                            <div class="form-control-wrap"><input type="text" class="form-control" id="default-11"
+                                    placeholder="2"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">                    
+                        <div class="form-group"><label class="form-label" for="default-06">	
+                            Fais-tu du compostage ? </label>
+                            <div class="form-control-wrap ">
+                                <div class="form-control-select"><select class="form-control" id="default-11">
+                                        <option value="default_option">Oui</option>
+                                        <option value="option_select_name">Non</option>
+                                        <option value="option_select_name">Parfois</option>
+                                        <option value="option_select_name">Rarement</option>
+                                    </select></div>
+                            </div>
+                        </div>
+                    </div>                
+                    <div class="col-sm-6">                    
+                        <div class="form-group"><label class="form-label" for="default-12">	
+                            Es-tu engagé dans une démarche 0 déchet ? (en achetant des aliments en vrac, en refusant la publicité-rebut et les circulaires, en utilisant des contenants réutilisables et des produits d’entretien ménager naturels) </label>
+                            <div class="form-control-wrap ">
+                                <div class="form-control-select"><select class="form-control" id="default-12">
+                                        <option value="default_option">Oui</option>
+                                        <option value="option_select_name">Non</option>
+                                        <option value="option_select_name">Parfois</option>
+                                        <option value="option_select_name">Rarement</option>
+                                    </select></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">                    
+                        <div class="form-group"><label class="form-label" for="default-13">	
+                            Recycles-tu les journaux, les boîtes en carton, le papier, les boîtes de conserve, les bouteilles en verre ou en plastique et autres matériaux? </label>
+                            <div class="form-control-wrap ">
+                                <div class="form-control-select"><select class="form-control" id="default-13">
+                                        <option value="default_option">Oui</option>
+                                        <option value="option_select_name">Non</option>
+                                        <option value="option_select_name">Parfois</option>
+                                        <option value="option_select_name">Rarement</option>
+                                    </select></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"><button type="submit" class="btn btn-lg btn-primary">Connaître mon résultat</button></div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+ 
+</div>
+</div>

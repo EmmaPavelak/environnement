@@ -2,35 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { ContactService } from './contact.service';
-
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  selector: 'app-ecological-footprint',
+  templateUrl: './ecological-footprint.component.html',
+  styleUrls: ['./ecological-footprint.component.scss']
 })
-export class ContactComponent implements OnInit {
+export class EcologicalFootprintComponent implements OnInit {
 
+ 
+  
   submitted = false;
-  contactForm: FormGroup;
+  testForm: FormGroup;
 
 
   ngOnInit(): void {
   }
 
-  constructor(private formBuilder: FormBuilder, private router: Router,private contactService: ContactService) {
-    this.contactForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
+  constructor(private formBuilder: FormBuilder, private router: Router) {
+    this.testForm = this.formBuilder.group({
+    /*  firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       message: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]]*/
     });
   }
 
-get f() { return this.contactForm.controls; }
+get f() { return this.testForm.controls; }
 
-saveContact(){
-  this.contactService.createContact(this.contactForm.value).subscribe(
+/*saveContact(){
+  this.contactService.createContact(this.testForm.value).subscribe(
     res => {
       console.log(res);
       console.log("cool");
@@ -44,7 +44,7 @@ saveContact(){
     }
   );
 
-}
+}*/
 
 
 
@@ -53,16 +53,16 @@ saveContact(){
     this.submitted = true;
     
     // stop here if form is invalid
-      if (this.contactForm.invalid) {
+      if (this.testForm.invalid) {
         return;
     }
-      console.warn('Your order has been submitted', this.contactForm.value);
+      console.warn('Your order has been submitted', this.testForm.value);
+      this.router.navigate(['test-result']);
       //this.registrationForm.value.password=Base64.stringify(sha256(this.registrationForm.value.password));
-          this.saveContact();
+         // this.saveContact();
 
       //this.registrationForm.reset();
       //this.router.navigate(['registration-confirm']);
   }
-
 
 }

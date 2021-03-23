@@ -19,6 +19,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { OfferTreeComponent } from './offer-tree/offer-tree.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { EcologicalFootprintComponent } from './ecological-footprint/ecological-footprint.component';
+import { ContactConfirmComponent } from './contact/contact-confirm/contact-confirm.component';
+import { TestResultComponent } from './test-result/test-result.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     TermsComponent,
     MyAccountComponent,
     OfferTreeComponent,
-    EditUserComponent
+    EditUserComponent,
+    EcologicalFootprintComponent,
+    ContactConfirmComponent,
+    TestResultComponent
   ],
   imports: [
     BrowserModule,
