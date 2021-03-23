@@ -7,6 +7,9 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationConfirmComponent } from './registration/registration-confirm/registration-confirm.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { TermsComponent } from './terms/terms.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { OfferTreeComponent } from './offer-tree/offer-tree.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +20,9 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'terms', component: TermsComponent },
+  { path: 'my-account', component: MyAccountComponent },
+  { path: 'offer-tree', component: OfferTreeComponent },
+  { path: 'edit-user', component: EditUserComponent },
    /*{ path: 'not-found', component: FourOhFourComponent },*/
   { path: '**', redirectTo: '' }
 ];
