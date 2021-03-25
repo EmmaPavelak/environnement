@@ -59,42 +59,50 @@
                                                         <div class="data-item" data-toggle="modal" data-target="#profile-edit">
                                                             <div class="data-col">
                                                                 <span class="data-label">Nom Complet</span>
-                                                                <span class="data-value">John Doe</span>
+                                                                <span class="data-value">{{user.firstname}} {{user.lastname}}</span>
                                                             </div>
                                                             <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                                         </div><!-- data-item -->
                                                         <div class="data-item" data-toggle="modal" data-target="#profile-edit">
                                                             <div class="data-col">
                                                                 <span class="data-label">Pseudo</span>
-                                                                <span class="data-value">JDoe</span>
+                                                                <span class="data-value">{{user.username}}</span>
                                                             </div>
                                                             <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                                         </div><!-- data-item -->
                                                         <div class="data-item">
                                                             <div class="data-col">
                                                                 <span class="data-label">Mail</span>
-                                                                <span class="data-value">john.doe@environnement.com</span>
+                                                                <span class="data-value">{{user.email}}</span>
                                                             </div>
                                                             <div class="data-col data-col-end"><span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span></div>
                                                         </div><!-- data-item -->
                                                         <div class="data-item" data-toggle="modal" data-target="#profile-edit">
                                                             <div class="data-col">
                                                                 <span class="data-label">Numéro de téléphone</span>
-                                                                <span class="data-value text-soft">Non renseigné</span>
+                                                                <div *ngIf="user.tel;then ok else notok">Le contenu saisi ici sera ignoré.</div>
+                                                                <ng-template #ok>
+                                                                    <span class="data-value">0{{user.tel}}</span>
+                                                                </ng-template>
+                                                                <ng-template #notok>
+                                                                    <span class="data-value text-soft">Non renseigné</span>
+                                                                </ng-template>
+                                                                
+                                                                
                                                             </div>
                                                             <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                                         </div><!-- data-item -->
                                                         <div class="data-item" data-toggle="modal" data-target="#profile-edit">
                                                             <div class="data-col">
                                                                 <span class="data-label">Date de Naissance</span>
-                                                                <span class="data-value">25 Juin 1997</span>
+                                                                <span class="data-value">{{user.birthDate.substr(0, 10)}}</span>
                                                             </div>
                                                             <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                                         </div><!-- data-item -->
                                                         <div class="data-item" data-toggle="modal" data-target="#profile-edit" data-tab-target="#address">
                                                             <div class="data-col">
                                                                 <span class="data-label">Adresse</span>
-                                                                <span class="data-value">22 Impasse Charles Fourier,<br>31200, Toulouse</span>
+                                                                <span class="data-value">{{user.address}}</span>
                                                             </div>
                                                             <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                                         </div><!-- data-item -->
@@ -134,25 +142,25 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="full-name">Nom Complet</label>
-                                            <input type="text" class="form-control form-control-lg" id="full-name" value="John Doe" placeholder="Entrez votre nom complet">
+                                            <input type="text" class="form-control form-control-lg" id="full-name" value="{{user.firstname}} {{user.lastname}}" placeholder="Entrez votre nom complet">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="display-name">Pseudo</label>
-                                            <input type="text" class="form-control form-control-lg" id="display-name" value="JDoe" placeholder="Entrez votre pseudo">
+                                            <input type="text" class="form-control form-control-lg" id="display-name" value="{{user.username}}" placeholder="Entrez votre pseudo">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="phone-no">Numéro de téléphone</label>
-                                            <input type="text" class="form-control form-control-lg" id="phone-no" value="+330123456789" placeholder="Entrez votre numéro de téléphone">
+                                            <input type="text" class="form-control form-control-lg" id="phone-no" value="0{{user.tel}}" placeholder="Entrez votre numéro de téléphone">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="birth-day">Date de Naissance</label>
-                                            <input type="text" class="form-control form-control-lg date-picker" id="birth-day" placeholder="Entrez votre date de naissance">
+                                            <input type="text" class="form-control form-control-lg date-picker" id="birth-day" placeholder="Entrez votre date de naissance" value="{{user.birthDate.substr(0, 10)}}">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -172,7 +180,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="address-l1">Addresse</label>
-                                            <input type="text" class="form-control form-control-lg" id="address-l1" value="22 Impasse Charles Fourier">
+                                            <input type="text" class="form-control form-control-lg" id="address-l1" value="{{user.address}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -203,7 +211,7 @@
                                     <div class="col-12">
                                         <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                             <li>
-                                                <a href="#" class="btn btn-lg btn-primary">Mettre à jour l'adresse</a>
+                                                <a href="#" (click)="update()" class="btn btn-lg btn-primary">Mettre à jour l'adresse</a>
                                             </li>
                                             <li>
                                                 <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>

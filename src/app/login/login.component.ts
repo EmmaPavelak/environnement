@@ -34,6 +34,7 @@ login(){
       console.log("cool");
       //this.toastr.success('Votre compte a été créer avec succès.', 'Success');
       this.router.navigate(['home']);
+      sessionStorage.setItem('isConnected', "true");
     },
     err => {
       console.log('Error occured:' , err);

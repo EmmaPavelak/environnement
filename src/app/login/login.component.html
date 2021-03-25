@@ -30,10 +30,9 @@
           oublié</a>
       </div>
       <div class="form-control-wrap">
-        <a tabindex="-1" routerLink="#" class="form-icon form-icon-right passcode-switch" data-target="password">
-          <em class="passcode-icon icon-show icon ni ni-eye"></em><em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
-        </a><input type="password" class="form-control form-control-lg" id="password" placeholder="Entrer votre mot de passe"
+        <input type="password" class="form-control form-control-lg" id="password" placeholder="Entrer votre mot de passe"
           formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
+          
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Mot de passe invalide</div>
         </div>
