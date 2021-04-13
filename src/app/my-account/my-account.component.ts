@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users/users.service';
+import jwt_decode from "jwt-decode";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-my-account',
@@ -9,31 +11,68 @@ import { UsersService } from '../users/users.service';
 export class MyAccountComponent implements OnInit {
 
   user:any;
+  tokenDecode:any;
+  token= localStorage.getItem('token');
+  updateForm: FormGroup;  
+  submitted = false;
+  registerOK = true;
 
-  constructor(private userService: UsersService) { }
+  constructor(private formBuilder: FormBuilder,private userService: UsersService) { 
+    this.user={
+      id: 0,
+      address: "",
+      birthDate:new Date(),
+      email: "",
+      firstname: "",    
+      lastname: "",
+      password: "",
+      tel: 0,
+      username: ""}
+      
+    this.updateForm = this.formBuilder.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]], 
+      tel: [''], 
+      address: ['',Validators.required], 
+      birthDate: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
-    this.getUserById(1);
+    if(this.token != null){
+      this.tokenDecode = jwt_decode(this.token); 
+      this.getUserById(this.tokenDecode.id);
+    }
   }
   getUserById(id: number){
     this.userService.getUserByID(id).subscribe(data => {
-      console.log(data);
       this.user = data;  
       });  
   }
-update(){
-  /*this.userService.updateUser(1,this.updateForm.value).subscribe(
+updateUser(){
+  this.userService.updateUser(this.tokenDecode.id,this.updateForm.value).subscribe(
     res => {
       console.log(res);
-      //this.toastr.success('Votre compte a été créer avec succès.', 'Success');
-      //this.router.navigate(['registration-confirm']);
     },
     err => {
       this.registerOK = false;
       console.log('Error occured:' , err);
-     // this.toastr.error(err.message, 'Error occured');
     }
-  );*/
+  );
+}
+onSubmit(): void {
+  this.submitted = true;
+  
+    if (this.updateForm.invalid) {
+      return;
+  }
+    console.warn('Your order has been submitted', this.updateForm.value);
+    this.updateUser();
+
+    //this.registrationForm.reset();
+    //this.router.navigate(['registration-confirm']);
 }
  
 

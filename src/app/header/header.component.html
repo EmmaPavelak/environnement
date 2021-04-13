@@ -20,7 +20,7 @@
             </div>
             <div class="nk-header-tools">
                 <ul class="nk-quick-nav">
-                    <div *ngIf="isConntected == 'true';then co else notco">Le contenu saisi ici sera ignoré.</div>
+                    <div *ngIf="token != null then co else notco">Le contenu saisi ici sera ignoré.</div>
                     <ng-template #notco>
                         <li><a routerLink="login"><span>Se connecter</span></a></li>
                         <li><a routerLink="registration"><span>S'inscrire</span></a> </li>
@@ -47,9 +47,8 @@
                                     <ul class="link-list">
                                         <li><a routerLink="my-account"><em class="icon ni ni-user-alt"></em><span>Mon
                                                     profil</span></a></li>
-                                        <li><a routerLink="account-setting"><em
-                                                    class="icon ni ni-setting-alt"></em><span>Paramètres du
-                                                    compte</span></a>
+                                        <li><a [routerLink]="['/edit-user/']"><em
+                                                    class="icon ni ni-setting-alt"></em><span>Gestion des utilisateurs</span></a>
                                         </li>
                                         <!--<li><a routerLink="login"><em class="icon ni ni-activity-alt"></em><span>Se
                                                     connecter</span></a>

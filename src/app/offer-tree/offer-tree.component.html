@@ -8,39 +8,7 @@
                 <div class="nk-content ">
                     <div class="container wide-xl">
                         <div class="nk-content-inner">
-                            <div class="nk-aside" data-content="sideNav" data-toggle-overlay="true" data-toggle-screen="lg" data-toggle-body="true">
-                                <div class="nk-sidebar-menu" data-simplebar>
-                                    <ul class="nk-menu">
-                                        <li class="nk-menu-heading">
-                                            <h6 class="overline-title text-primary-alt">Menu</h6>
-                                        </li><!-- .nk-menu-heading -->
-                                        <li class="nk-menu-item">
-                                            <a [routerLink]="['/my-account/']" class="nk-menu-link">
-                                                <span class="nk-menu-icon"><em class="icon ni ni-user-alt"></em></span>
-                                                <span class="nk-menu-text">Mes Information</span>
-                                            </a>
-                                        </li><!-- .nk-menu-item -->
-                                        <li class="nk-menu-item">
-                                            <a [routerLink]="['/offer-tree/']" class="nk-menu-link">
-                                                <span class="nk-menu-icon"><em class="icon ni ni-gift"></em></span>
-                                                <span class="nk-menu-text">Offrir un arbre</span>
-                                            </a>
-                                        </li><!-- .nk-menu-item -->
-                                        <li class="nk-menu-heading">
-                                            <h6 class="overline-title text-danger">Administration</h6>
-                                        </li><!-- .nk-menu-heading -->
-                                        <li class="nk-menu-item">
-                                            <a [routerLink]="['/edit-user/']" class="nk-menu-link text-danger">
-                                                <span class="nk-menu-icon"><em class="icon ni ni-users text-danger"></em></span>
-                                                <span class="nk-menu-text">Gestion des utilisateurs</span>
-                                            </a>
-                                        </li>
-                                    </ul><!-- .nk-menu -->
-                                </div><!-- .nk-sidebar-menu -->
-                                <div class="nk-aside-close">
-                                    <a href="#" class="toggle" data-target="sideNav"><em class="icon ni ni-cross"></em></a>
-                                </div><!-- .nk-aside-close -->
-                            </div><!-- .nk-aside -->
+               <!--ASIDE HERE-->
                             <div class="nk-content-body">
                                 <div class="nk-content-wrap">
                                     <div class="nk-block-head nk-block-head-sm">
@@ -53,31 +21,16 @@
                                             </div><!-- .nk-block-head-content -->
                                         </div><!-- .nk-block-between -->
                                     </div><!-- .nk-block-head -->
-                                    <ul class="row g-gs preview-icon-svg">
-                                        <li class="col-lg-3 col-6 col-sm-4">
+                                    <ul class="row g-gs preview-icon-svg"  >
+                                        <li class="col-lg-3 col-6 col-sm-4" *ngFor=" let tree of trees">
                                             <div class="preview-icon-box card card-bordered">
                                                 <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/palmier.png" alt="">
+                                                    <img src="../assets/tree/{{tree.name.toLowerCase()}}.png" alt="{{tree.name}}"> 
                                                 </div>
-                                                <span class="preview-icon-name">Palmier</span>
+                                                <span class="preview-icon-name">{{tree.name}}</span>
                                             </div><!-- .preview-icon-box -->
                                         </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/sequoia.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Sequoia</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/erable.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Erable</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
+                                      
                                         <li class="col-lg-3 col-6 col-sm-4">
                                             <div class="preview-icon-box card card-bordered">
                                                 <div class="preview-icon-wrap">
@@ -85,47 +38,7 @@
                                                 </div>
                                                 <span class="preview-icon-name">Saule pleureur</span>
                                             </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/olivier.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Olivier</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/ginkgo.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Ginkgo</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/pommier.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Pommier</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/cypres.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Cypres</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/cactus.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Cactus</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
+                                        </li><!-- .col -->                                       
                                         <li class="col-lg-3 col-6 col-sm-4">
                                             <div class="preview-icon-box card card-bordered">
                                                 <div class="preview-icon-wrap">

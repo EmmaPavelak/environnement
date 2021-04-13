@@ -18,6 +18,6 @@ export class ContactService {
   }*/
 
   createContact(data: IContact[]): Observable<Object> {
-    return this.http.post(`${this.url}/api/contact/contact`, data)  
+    return this.http.post(`${this.url}/api/contact`, data)  
   }
 }

@@ -12,7 +12,7 @@
                                 <div class="nk-sidebar-menu" data-simplebar>
                                     <ul class="nk-menu">
                                         <li class="nk-menu-heading">
-                                            <h6 class="overline-title text-primary-alt">Menu</h6>
+                                            <h6 class="overline-title text-primary-alt">Utilisateur</h6>
                                         </li><!-- .nk-menu-heading -->
                                         <li class="nk-menu-item">
                                             <a [routerLink]="['/my-account/']" class="nk-menu-link">
@@ -20,12 +20,12 @@
                                                 <span class="nk-menu-text">Mes Information</span>
                                             </a>
                                         </li><!-- .nk-menu-item -->
-                                        <li class="nk-menu-item">
+                                       <!-- <li class="nk-menu-item">
                                             <a [routerLink]="['/offer-tree/']" class="nk-menu-link">
                                                 <span class="nk-menu-icon"><em class="icon ni ni-gift"></em></span>
                                                 <span class="nk-menu-text">Offrir un arbre</span>
                                             </a>
-                                        </li><!-- .nk-menu-item -->
+                                        </li>--><!-- .nk-menu-item -->
                                         <li class="nk-menu-heading">
                                             <h6 class="overline-title text-danger">Administration</h6>
                                         </li><!-- .nk-menu-heading -->
@@ -138,6 +138,7 @@
                         </ul><!-- .nav-tabs -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="personal">
+                                <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
                                 <div class="row gy-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -166,7 +167,7 @@
                                     <div class="col-12">
                                         <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                             <li>
-                                                <a href="#" class="btn btn-lg btn-primary">Mettre à jour le profil</a>
+                                                <div class="form-group"><button class="btn btn-lg btn-primary btn-block">Mettre à jour le profil</button></div>
                                             </li>
                                             <li>
                                                 <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
@@ -174,13 +175,14 @@
                                         </ul>
                                     </div>
                                 </div>
+                                </form>
                             </div><!-- .tab-pane -->
                             <div class="tab-pane" id="address">
                                 <div class="row gy-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="address-l1">Addresse</label>
-                                            <input type="text" class="form-control form-control-lg" id="address-l1" value="{{user.address}">
+                                            <label class="form-label" for="address-l1">Adresse</label>
+                                            <input type="text" class="form-control form-control-lg" id="address-l1" value="16 ru Fefe"> <!--{{user.address}}-->
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -211,7 +213,7 @@
                                     <div class="col-12">
                                         <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                             <li>
-                                                <a href="#" (click)="update()" class="btn btn-lg btn-primary">Mettre à jour l'adresse</a>
+                                                <a href="#" class="btn btn-lg btn-primary">Mettre à jour l'adresse</a>
                                             </li>
                                             <li>
                                                 <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>

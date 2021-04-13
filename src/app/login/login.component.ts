@@ -30,11 +30,11 @@ get f() { return this.loginForm.controls; }
 login(){
   this.userService.loginUser(this.loginForm.value).subscribe(
     res => {
-      console.log(res);
+      console.log(Object.values(res)[0]);
       console.log("cool");
       //this.toastr.success('Votre compte a été créer avec succès.', 'Success');
       this.router.navigate(['home']);
-      sessionStorage.setItem('isConnected', "true");
+      localStorage.setItem('token', Object.values(res)[0]);
     },
     err => {
       console.log('Error occured:' , err);
