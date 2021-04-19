@@ -131,43 +131,94 @@
                         <ul class="nk-nav nav nav-tabs">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#personal">Information Personnel</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#address">Adresse</a>
-                            </li>
+                            </li>                           
                         </ul><!-- .nav-tabs -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="personal">
                                 <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+                                   
                                 <div class="row gy-4">
+                                
+                                    <input type="hidden" class="form-control" formControlName="id"  [(ngModel)]="id" >
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="full-name">Nom Complet</label>
-                                            <input type="text" class="form-control form-control-lg" id="full-name" value="{{user.firstname}} {{user.lastname}}" placeholder="Entrez votre nom complet">
+                                            <label class="form-label" for="full-name">Prénom</label>
+                                            <input type="text" class="form-control form-control-lg" formControlName="firstname" id="full-name" [(ngModel)]="user.firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+                                            <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                                <div *ngIf="f.firstname.errors.required">Prénom non rempli</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="full-name">Nom</label>
+                                            <input type="text" class="form-control form-control-lg" formControlName="lastname" id="full-name" [(ngModel)]="user.lastname" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
+                                            <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                                <div *ngIf="f.lastname.errors.required">Nom non rempli</div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="display-name">Pseudo</label>
-                                            <input type="text" class="form-control form-control-lg" id="display-name" value="{{user.username}}" placeholder="Entrez votre pseudo">
+                                            <input type="text" class="form-control form-control-lg" id="display-name" formControlName="username" [(ngModel)]="user.username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                                            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                                <div *ngIf="f.username.errors.required">Nom d'utilisateur non rempli</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="display-name">Mot de passe</label>
+                                            <input type="password" class="form-control form-control-lg" id="display-name" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Entrez votre mot de passe">
+                                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                                <div *ngIf="f.password.errors.required">Mot de passe non rempli</div>
+                                                <div *ngIf="f.password.errors.minlenght" class="text-danger">Mot de passe invalide</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="email">E-mail</label>
+                                            <input type="eamil" class="form-control form-control-lg" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" [(ngModel)]="user.email" placeholder="Entrez votre email">
+                                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                                <div *ngIf="f.email.errors.required">Email non rempli</div>
+                                                <div *ngIf="f.email.errors.email" class="text-danger">Email invalide</div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="phone-no">Numéro de téléphone</label>
-                                            <input type="text" class="form-control form-control-lg" id="phone-no" value="0{{user.tel}}" placeholder="Entrez votre numéro de téléphone">
-                                        </div>
+                                            <input type="text" class="form-control form-control-lg" id="phone-no" formControlName="tel" [(ngModel)]="user.tel"[ngClass]="{ 'is-invalid': submitted && f.tel.errors }">
+                                            <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
+                                                <div *ngIf="f.tel.errors.required">Téléphone non rempli</div>
+                                            </div>
+                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="birth-day">Date de Naissance</label>
-                                            <input type="text" class="form-control form-control-lg date-picker" id="birth-day" placeholder="Entrez votre date de naissance" value="{{user.birthDate.substr(0, 10)}}">
+                                            <input type="text" class="form-control form-control-lg date-picker" id="birth-day" formControlName="birthDate"  [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"[(ngModel)]="user.birthDate"> <!--.substr(0, 10)-->
+                                            <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
+                                                <div *ngIf="f.birthDate.errors.required">Date de naissance non rempli</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="address-l1">Adresse</label>
+                                            <input type="text" class="form-control form-control-lg" id="address-l1" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" [(ngModel)]="user.address">
+                                            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                                <div *ngIf="f.address.errors.required">Adresse non rempli</div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                                            <li>
-                                                <div class="form-group"><button class="btn btn-lg btn-primary btn-block">Mettre à jour le profil</button></div>
+                                            <li>                                             
+                                                <div class="form-group"><button class="btn btn-lg btn-primary btn-block"  type="submit">Mettre à jour le profil</button></div>
                                             </li>
                                             <li>
                                                 <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
@@ -177,51 +228,7 @@
                                 </div>
                                 </form>
                             </div><!-- .tab-pane -->
-                            <div class="tab-pane" id="address">
-                                <div class="row gy-4">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="address-l1">Adresse</label>
-                                            <input type="text" class="form-control form-control-lg" id="address-l1" value="16 ru Fefe"> <!--{{user.address}}-->
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="address-l2">Ville</label>
-                                            <input type="text" class="form-control form-control-lg" id="address-l2" value="31000, Toulouse">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="address-st">Region</label>
-                                            <input type="text" class="form-control form-control-lg" id="address-st" value="Occitanie">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="address-county">Pays</label>
-                                            <select class="form-select" id="address-county" data-ui="lg">
-                                                <option>France</option>
-                                                <option>États-Unis</option>
-                                                <option>Royaume-Uni</option>
-                                                <option>Australie</option>
-                                                <option>Inde</option>
-                                                <option>Bangladesh</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                                            <li>
-                                                <a href="#" class="btn btn-lg btn-primary">Mettre à jour l'adresse</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div><!-- .tab-pane -->
+        
                         </div><!-- .tab-content -->
                     </div><!-- .modal-body -->
                 </div><!-- .modal-content -->

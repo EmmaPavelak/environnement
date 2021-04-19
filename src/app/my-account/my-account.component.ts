@@ -16,6 +16,7 @@ export class MyAccountComponent implements OnInit {
   updateForm: FormGroup;  
   submitted = false;
   registerOK = true;
+  id:number=0;
 
   constructor(private formBuilder: FormBuilder,private userService: UsersService) { 
     this.user={
@@ -30,9 +31,11 @@ export class MyAccountComponent implements OnInit {
       username: ""}
       
     this.updateForm = this.formBuilder.group({
+      id: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]], 
       tel: [''], 
       address: ['',Validators.required], 
@@ -40,11 +43,15 @@ export class MyAccountComponent implements OnInit {
     });
   }
 
+  get f() { return this.updateForm.controls; }
+
   ngOnInit(): void {
     if(this.token != null){
       this.tokenDecode = jwt_decode(this.token); 
-      this.getUserById(this.tokenDecode.id);
+      this.id=this.tokenDecode.id;
+      this.getUserById(this.id);
     }
+    console.log(this.id);
   }
   getUserById(id: number){
     this.userService.getUserByID(id).subscribe(data => {
@@ -64,15 +71,15 @@ updateUser(){
 }
 onSubmit(): void {
   this.submitted = true;
+  console.log(this.updateForm.value);
   
-    if (this.updateForm.invalid) {
-      return;
-  }
-    console.warn('Your order has been submitted', this.updateForm.value);
+   // stop here if form is invalid
+   if (this.updateForm.invalid) {
+    return;
+}
     this.updateUser();
+    this.submitted = true;
 
-    //this.registrationForm.reset();
-    //this.router.navigate(['registration-confirm']);
 }
  
 
