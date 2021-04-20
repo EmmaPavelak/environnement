@@ -25,6 +25,11 @@ export class OfferTreeComponent implements OnInit {
   token=localStorage.getItem('token');
   tokenDecode:any;
   role:any;
+  
+  basket=sessionStorage.getItem('basket');
+  basketOBJ:any;
+ 
+
 
   constructor(private treeService: TreesService, private formBuilder: FormBuilder) { 
     this.onetree={id: 0, name: "", price: 0, description: ""};
@@ -54,6 +59,9 @@ export class OfferTreeComponent implements OnInit {
       this.role = this.tokenDecode.role; 
     }
 
+    if(this.basket != null){
+      this.basketOBJ=JSON.parse(this.basket);
+    }
   }
 
   displayAdd(){
@@ -137,4 +145,14 @@ export class OfferTreeComponent implements OnInit {
      location.reload();
 
   }
+  addToBasket(){
+    sessionStorage.setItem('basket',JSON.stringify(this.onetree));
+    console.log(this.onetree);
+  }
+  pay(){
+    //point=point+nombre de points total
+    //vider le panier
+    sessionStorage.removeItem('basket');
+  }
+  
 }
