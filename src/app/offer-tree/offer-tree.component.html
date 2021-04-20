@@ -18,12 +18,53 @@
                                                 <div class="nk-block-des text-soft">
                                                     <p>Vous pouvez offrir un arbre à quelqu'un.</p>
                                                 </div>
+                                                <button class="btn btn-secondary" (click)="displayAdd()">Ajouter un arbre</button>
+
+                                                <form [formGroup]="addTreeForm" (ngSubmit)="onSubmit()" [ngStyle]="{ display: seeAddForm ?'block' : 'none' }">
+
+                                                    <div class="form-group">
+                                                      <div class="form-label-group">
+                                                        <label class="form-label" for="default-01">Nom</label>       
+                                                      </div>
+                                                      <input type="text" class="form-control form-control-lg" id="default-01"
+                                                        placeholder="Entrer le nom de l'arbre" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required >
+                                                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                                          <div *ngIf="f.name.errors.required">Nom vide</div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <div class="form-label-group">
+                                                        <label class="form-label" for="price">Prix</label>                                                       
+                                                      </div>
+                                                      <div class="form-control-wrap">
+                                                        <input type="number" class="form-control form-control-lg" id="price" placeholder="Entrer le prix de l'arbre"
+                                                          formControlName="price"  [ngClass]="{ 'is-invalid': submitted && f.price.errors }" required>
+                                                          
+                                                          <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                                                            <div *ngIf="f.price.errors.required">Prix vide</div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <div class="form-label-group">
+                                                          <label class="form-label" for="default-01">Description</label>       
+                                                        </div>
+                                                        <input type="text" class="form-control form-control-lg" id="default-01"
+                                                          placeholder="Entrer la description de l'arbre" formControlName="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" required >
+                                                          <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                                                            <div *ngIf="f.description.errors.required">Nom vide</div>
+                                                        </div>
+                                                      </div>
+                                                    <div class="form-group"><button class="btn btn-lg btn-primary btn-block">Ajouter cet arbre</button></div>    
+                                                  </form>
+
                                             </div><!-- .nk-block-head-content -->
                                         </div><!-- .nk-block-between -->
                                     </div><!-- .nk-block-head -->
                                     <ul class="row g-gs preview-icon-svg"  >
                                         <li class="col-lg-3 col-6 col-sm-4" *ngFor=" let tree of trees">
-                                            <div class="preview-icon-box card card-bordered">
+                                            <div class="preview-icon-box card card-bordered" (click)="getTreeById(tree.id)" data-toggle="modal" data-target="#tree-details">
                                                 <div class="preview-icon-wrap">
                                                     <img src="../assets/tree/{{tree.name.toLowerCase()}}.png" alt="{{tree.name}}"> 
                                                 </div>
@@ -58,5 +99,69 @@
             <!-- wrap @e -->
         </div>
         <!-- main @e -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="tree-details">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+
+                     <h2 class="modal-title">{{onetree.name}}</h2>
+                   
+                    <div class="modal-body">
+                        <div class="preview-icon-wrap">
+                            <img src="../assets/tree/{{onetree.name.toLowerCase()}}.png" alt="palmier"> 
+                        </div>
+                        <p [ngStyle]="{ display: seeEditForm ?'none' : 'block' }">Prix : {{onetree.price}}</p>
+                        <p [ngStyle]="{ display: seeEditForm ?'none' : 'block' }">{{onetree.description}}</p>
+                   
+
+                    <form [formGroup]="updateTreeForm" (ngSubmit)="editTree()" [ngStyle]="{ display: seeEditForm ?'block' : 'none' }">
+
+                        <input type="hidden" class="form-control" formControlName="id"  [(ngModel)]="onetree.id" >
+
+                        <div class="form-group">
+                          <div class="form-label-group">
+                            <label class="form-label" for="default-01">Nom</label>       
+                          </div>
+                          <input type="text" class="form-control form-control-lg" id="default-01"
+                            placeholder="Entrer le nom de l'arbre" formControlName="name" [(ngModel)]="onetree.name" [ngClass]="{ 'is-invalid': submittedEdit && fe.name.errors }" required >
+                            <div *ngIf="submittedEdit && fe.name.errors" class="invalid-feedback">
+                              <div *ngIf="fe.name.errors.required">Nom vide</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-label-group">
+                            <label class="form-label" for="price">Prix</label>                                                       
+                          </div>
+                          <div class="form-control-wrap">
+                            <input type="number" class="form-control form-control-lg" id="price"  [(ngModel)]="onetree.price"  placeholder="Entrer le prix de l'arbre"
+                              formControlName="price"  [ngClass]="{ 'is-invalid': submittedEdit && fe.price.errors }" required>
+                              
+                              <div *ngIf="submittedEdit && fe.price.errors" class="invalid-feedback">
+                                <div *ngIf="fe.price.errors.required">Prix vide</div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-label-group">
+                              <label class="form-label" for="default-01">Description</label>       
+                            </div>
+                            <input type="text" class="form-control form-control-lg" id="default-01"
+                              placeholder="Entrer la description de l'arbre" formControlName="description"  [(ngModel)]="onetree.description"  [ngClass]="{ 'is-invalid': submittedEdit && fe.description.errors }" required >
+                              <div *ngIf="submittedEdit && fe.description.errors" class="invalid-feedback">
+                                <div *ngIf="fe.description.errors.required">Nom vide</div>
+                            </div>
+                          </div>
+                        <div class="form-group"><button class="btn btn-lg btn-primary btn-block">Editer cet arbre</button></div>    
+                      </form>
+                  </div>
+                   <div class="modal-footer bg-light">
+                        <button class="btn btn-primary">Offrir cet arbre</button>
+                        <button class="btn btn-secondary" (click)="displayEdit()">Editer</button>
+                        <button class="btn btn-danger" (click)="deleteTree(onetree.id)">Supprimer cet arbre</button> 
+                   </div>
+                   
+                </div>
+            </div>
+        </div>
     </div>
 </body>

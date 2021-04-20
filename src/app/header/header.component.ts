@@ -41,8 +41,7 @@ export class HeaderComponent implements OnInit {
   }
   
   logout(){
-    console.log("bye");
-    localStorage.removeItem('token');
+    this.userService.logout();
   }
   
 }

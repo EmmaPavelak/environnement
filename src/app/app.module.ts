@@ -14,7 +14,7 @@ import { RegistrationConfirmComponent } from './registration/registration-confir
 import { ContactComponent } from './contact/contact.component';
 import { TermsComponent } from './terms/terms.component';
 import { UsersService } from './users/users.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { OfferTreeComponent } from './offer-tree/offer-tree.component';
@@ -22,6 +22,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { EcologicalFootprintComponent } from './ecological-footprint/ecological-footprint.component';
 import { ContactConfirmComponent } from './contact/contact-confirm/contact-confirm.component';
 import { TestResultComponent } from './test-result/test-result.component';
+import jwt_decode from "jwt-decode";
+import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,27 @@ import { TestResultComponent } from './test-result/test-result.component';
     HttpClientModule
     
   ],
-  providers: [UsersService],
+  providers: [UsersService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+     {
+    provide: 'AdminGuard', // Provider name
+    useValue: (token: any) => {
+      token=localStorage.getItem('token');
+      
+      if(token != null){
+       /* if(jwt_decode(token).role =="Administrateur"){
+          return true;
+        }else{
+          
+          return false;
+        }*/
+        return true;
+      }else{
+        return false;
+      }
+      
+      
+    }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

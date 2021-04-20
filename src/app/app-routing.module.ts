@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'terms', component: TermsComponent },
   { path: 'my-account', component: MyAccountComponent },
   { path: 'offer-tree', component: OfferTreeComponent },
-  { path: 'edit-user', component: EditUserComponent },
+  { path: 'edit-user',  canActivate: ['AdminGuard'], component: EditUserComponent },
   { path: 'ecological-footprint', component: EcologicalFootprintComponent },
   { path: 'test-result', component: TestResultComponent },
    /*{ path: 'not-found', component: FourOhFourComponent },*/

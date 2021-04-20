@@ -10,8 +10,7 @@ import { UsersService } from '../users/users.service';
 })
 export class LoginComponent implements OnInit {
 
-  connectOK =true;
-
+  token=localStorage.getItem('token');
   loginForm: FormGroup;
   submitted = false;
 
@@ -28,20 +27,22 @@ constructor(private formBuilder: FormBuilder, private router: Router,private use
 get f() { return this.loginForm.controls; }
 
 login(){
-  this.userService.loginUser(this.loginForm.value).subscribe(
+
+  this.userService.loginUser(this.loginForm.value).then(
+    () => { this.router.navigate(['home']);
+  });
+
+ /* this.userService.loginUser(this.loginForm.value).subscribe(
     res => {
       console.log(Object.values(res)[0]);
-      console.log("cool");
-      //this.toastr.success('Votre compte a été créer avec succès.', 'Success');
-      this.router.navigate(['home']);
       localStorage.setItem('token', Object.values(res)[0]);
+      this.router.navigate(['home']);
+     
     },
     err => {
       console.log('Error occured:' , err);
-      this.connectOK =false;
-     // this.toastr.error(err.message, 'Error occured');
     }
-  );
+  );*/
 
 }
 
