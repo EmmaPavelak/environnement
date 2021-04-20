@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   token= localStorage.getItem('token');
   user:any;
   tokenDecode:any;
+  role:any;
 
   constructor(private userService: UsersService) { 
     this.user={
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
     
     if(this.token != null){
       this.tokenDecode = jwt_decode(this.token); 
+      this.role=this.tokenDecode.role;
       this.getUserById(this.tokenDecode.id);
     }
   

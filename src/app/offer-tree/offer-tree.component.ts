@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ITree } from 'src/models/tree.models';
 import { TreesService } from '../trees/trees.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-offer-tree',
@@ -20,6 +21,10 @@ export class OfferTreeComponent implements OnInit {
 
   seeAddForm= false;
   seeEditForm= false;
+
+  token=localStorage.getItem('token');
+  tokenDecode:any;
+  role:any;
 
   constructor(private treeService: TreesService, private formBuilder: FormBuilder) { 
     this.onetree={id: 0, name: "", price: 0, description: ""};
@@ -43,6 +48,12 @@ export class OfferTreeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTrees();
+
+    if(this.token != null){
+      this.tokenDecode = jwt_decode(this.token);
+      this.role = this.tokenDecode.role; 
+    }
+
   }
 
   displayAdd(){

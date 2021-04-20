@@ -26,10 +26,10 @@
                                                 <span class="nk-menu-text">Offrir un arbre</span>
                                             </a>
                                         </li>--><!-- .nk-menu-item -->
-                                        <li class="nk-menu-heading">
+                                        <li class="nk-menu-heading"  [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }" >
                                             <h6 class="overline-title text-danger">Administration</h6>
                                         </li><!-- .nk-menu-heading -->
-                                        <li class="nk-menu-item">
+                                        <li class="nk-menu-item"  [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }" >
                                             <a [routerLink]="['/edit-user/']" class="nk-menu-link text-danger">
                                                 <span class="nk-menu-icon"><em class="icon ni ni-users text-danger"></em></span>
                                                 <span class="nk-menu-text">Gestion des utilisateurs</span>

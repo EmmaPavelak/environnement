@@ -18,7 +18,7 @@
                                                 <div class="nk-block-des text-soft">
                                                     <p>Vous pouvez offrir un arbre à quelqu'un.</p>
                                                 </div>
-                                                <button class="btn btn-secondary" (click)="displayAdd()">Ajouter un arbre</button>
+                                                <button class="btn btn-secondary" [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }" (click)="displayAdd()">Ajouter un arbre</button>
 
                                                 <form [formGroup]="addTreeForm" (ngSubmit)="onSubmit()" [ngStyle]="{ display: seeAddForm ?'block' : 'none' }">
 
@@ -70,24 +70,7 @@
                                                 </div>
                                                 <span class="preview-icon-name">{{tree.name}}</span>
                                             </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                      
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/arbre_triste.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Saule pleureur</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->                                       
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/weed.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Un gros pied d'weed</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
+                                        </li><!-- .col -->                          
                                     </ul>
                                 </div>
                             </div>
@@ -156,8 +139,8 @@
                   </div>
                    <div class="modal-footer bg-light">
                         <button class="btn btn-primary">Offrir cet arbre</button>
-                        <button class="btn btn-secondary" (click)="displayEdit()">Editer</button>
-                        <button class="btn btn-danger" (click)="deleteTree(onetree.id)">Supprimer cet arbre</button> 
+                        <button class="btn btn-secondary" [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }" (click)="displayEdit()">Editer</button>
+                        <button class="btn btn-danger" [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }"  (click)="deleteTree(onetree.id)">Supprimer cet arbre</button> 
                    </div>
                    
                 </div>

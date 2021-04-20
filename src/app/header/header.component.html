@@ -47,7 +47,7 @@
                                     <ul class="link-list">
                                         <li><a routerLink="my-account"><em class="icon ni ni-user-alt"></em><span>Mon
                                                     profil</span></a></li>
-                                        <li><a [routerLink]="['/edit-user/']"><em
+                                        <li  [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }" ><a [routerLink]="['/edit-user/']"><em
                                                     class="icon ni ni-setting-alt"></em><span>Gestion des utilisateurs</span></a>
                                         </li>
                                         <!--<li><a routerLink="login"><em class="icon ni ni-activity-alt"></em><span>Se

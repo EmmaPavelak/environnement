@@ -34,7 +34,8 @@ export class RegistrationComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       point:0,
-      role:"Utilisateur"
+      role:"Utilisateur",
+      registration:new Date()
     }, {
       validator: MustMatch('password', 'confirmPassword')
   });

@@ -17,6 +17,7 @@ export class MyAccountComponent implements OnInit {
   submitted = false;
   registerOK = true;
   id:number=0;
+  role:any;
 
   constructor(private formBuilder: FormBuilder,private userService: UsersService) { 
     this.user={
@@ -49,6 +50,7 @@ export class MyAccountComponent implements OnInit {
     if(this.token != null){
       this.tokenDecode = jwt_decode(this.token); 
       this.id=this.tokenDecode.id;
+      this.role=this.tokenDecode.role;
       this.getUserById(this.id);
     }
     console.log(this.id);

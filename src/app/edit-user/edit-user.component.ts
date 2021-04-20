@@ -41,7 +41,8 @@ export class EditUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]], 
       tel: [''], 
       address: ['',Validators.required], 
-      birthDate: ['', Validators.required]
+      birthDate: ['', Validators.required],
+      role: ['', Validators.required]
     });
   }
 
@@ -51,7 +52,6 @@ export class EditUserComponent implements OnInit {
     if(this.token != null){
       this.tokenDecode = jwt_decode(this.token); 
       this.id=this.tokenDecode.id;
-      console.log(this.tokenDecode.role)
       this.getUserById(this.id);
     }
     console.log(this.id);
@@ -61,7 +61,6 @@ export class EditUserComponent implements OnInit {
     this.userService.getAllUser().subscribe(
       res => {
         this.users=res;
-        console.log("ok");
         console.log(res);
       },
       err => {
@@ -101,6 +100,7 @@ updateUser(){
   this.userService.updateUser(this.tokenDecode.id,this.updateForm.value).subscribe(
     res => {
       console.log(res);
+      location.reload();
     },
     err => {
       this.registerOK = false;
