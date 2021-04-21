@@ -10,13 +10,7 @@ export class ContactService {
 
   constructor(private http: HttpClient) { }
   url = 'http://localhost:3000';
-
-  /*getUser() {
-    return this
-      .http
-      .get(`${this.url}/users`);
-  }*/
-
+ 
   createContact(data: IContact[]): Observable<Object> {
     return this.http.post(`${this.url}/api/contact`, data)  
   }

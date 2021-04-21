@@ -61,8 +61,7 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
       if(token != null){
        /* if(jwt_decode(token).role =="Administrateur"){
           return true;
-        }else{
-          
+        }else{          
           return false;
         }*/
         return true;
