@@ -212,9 +212,7 @@
                                 class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-check bg-success"></em>
                             <h4 class="nk-modal-title">Felicitations !</h4>
                             <div class="nk-modal-text">
-                                <div class="caption-text">Vous avez offert <strong>2</strong> arbres de type
-                                    <strong>Palmier</strong> </div><span class="sub-text-sm">Vous avez aidé la planète et pour cela vous avez reçu 300 points.
-                                         <a routerLink="my-account">Voir votre profil</a></span>
+                                <div class="caption-text">Vous avez offert <strong>{{basketArray.length}}</strong> arbres. </div><span class="sub-text-sm">Vous avez aidé la planète et pour cela vous avez reçu {{totalpt}} points.</span>
                             </div>
                             <div (click)="refresh()" class="nk-modal-action"><a href="#" class="btn btn-lg btn-mw btn-primary"
                                     data-dismiss="modal">OK</a></div>
