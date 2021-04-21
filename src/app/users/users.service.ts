@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UsersService {
 
-  token: any;
+  //token: any;
   constructor(private http: HttpClient) { 
    
   }
@@ -32,11 +32,10 @@ export class UsersService {
   loginUser(data: IUser[]){
     return new Promise((resolve, reject) => { this.http.post(`${this.url}/api/auth/login`, data).subscribe(
       res => {
-        this.token= Object.values(res)[0].toString();
-        localStorage.setItem('token', this.token);  
-        
-
-        resolve(this.token);
+        const token= Object.values(res)[0].toString();
+        localStorage.setItem('token', token);  
+  
+        resolve(token);
       },
       (error) => {
         reject(error);
@@ -45,10 +44,13 @@ export class UsersService {
     });  
     
   }
+  /*public getToken(): string | null {
+    return localStorage.getItem('token');
+  }*/
 
   logout() {
     localStorage.removeItem('token');
-    this.token = null;
+    //this.token = null;
     location.reload();
   }
 
