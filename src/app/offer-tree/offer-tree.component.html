@@ -13,15 +13,15 @@
                                 data-toggle-screen="lg" data-toggle-body="true">
                                 <div class="nk-sidebar-menu card-inner bg-lighter" data-simplebar>
                                     <h3>Mon Panier</h3>
-                                    <div class="card card-bordered">
+                                    <div class="card card-bordered" *ngFor=" let basketOBJ of basketArray">
                                         <div class="card-inner">
                                             <h5 class="card-title">1 x {{basketOBJ.name}}</h5>
                                             <p>{{basketOBJ.price}} €</p>
-                                            <p>300 points rapportés</p>
+                                            <p>{{basketOBJ.price*1.2}} points rapportés</p>
                                         </div>
                                     </div>
-                                    <p>Total de points rapportés : <strong>300</strong> points</p>
-                                    <p>Total à payer : <strong>300</strong> euros </p>
+                                    <p>Total de points rapportés : <strong>{{totalpt}}</strong> points</p>
+                                    <p>Total à payer : <strong>{{total}}</strong> euros </p>
                                     <button class="btn btn-secondary" data-toggle="modal"
                                     data-target="#modalAlert" (click)="pay()">Payer</button>
                                 </div><!-- .nk-sidebar-menu -->
@@ -136,6 +136,7 @@
                             <img src="../assets/tree/{{onetree.name.toLowerCase()}}.png" alt="palmier">
                         </div>
                         <p [ngStyle]="{ display: seeEditForm ?'none' : 'block' }">Prix : {{onetree.price}}</p>
+                        <p [ngStyle]="{ display: seeEditForm ?'none' : 'block' }">Points rapportés : {{onetree.price*1.2}}</p>
                         <p [ngStyle]="{ display: seeEditForm ?'none' : 'block' }">{{onetree.description}}</p>
 
 
@@ -189,7 +190,7 @@
                         </form>
                     </div>
                     <div class="modal-footer bg-light">
-                        <button class="btn btn-primary"  (click)="addToBasket()" >Offrir cet arbre</button>
+                        <button class="btn btn-primary" data-dismiss="modal" (click)="addToBasket()" >Offrir cet arbre</button>
                         <button class="btn btn-secondary"
                             [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }"
                             (click)="displayEdit()">Editer</button>
@@ -215,7 +216,7 @@
                                     <strong>Palmier</strong> </div><span class="sub-text-sm">Vous avez aidé la planète et pour cela vous avez reçu 300 points.
                                          <a routerLink="my-account">Voir votre profil</a></span>
                             </div>
-                            <div class="nk-modal-action"><a href="#" class="btn btn-lg btn-mw btn-primary"
+                            <div (click)="refresh()" class="nk-modal-action"><a href="#" class="btn btn-lg btn-mw btn-primary"
                                     data-dismiss="modal">OK</a></div>
                         </div>
                     </div>

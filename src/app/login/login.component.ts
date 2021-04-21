@@ -29,8 +29,10 @@ get f() { return this.loginForm.controls; }
 login(){
 
   this.userService.loginUser(this.loginForm.value).then(
-    () => { this.router.navigate(['home']);
-  });
+    () => { this.router.navigate(['home']);})  
+    .then(() => {
+    window.location.reload();
+  });;
 
  /* this.userService.loginUser(this.loginForm.value).subscribe(
     res => {

@@ -33,7 +33,8 @@ export class UsersService {
     return new Promise((resolve, reject) => { this.http.post(`${this.url}/api/auth/login`, data).subscribe(
       res => {
         this.token= Object.values(res)[0].toString();
-        localStorage.setItem('token', this.token);    
+        localStorage.setItem('token', this.token);  
+        
 
         resolve(this.token);
       },
@@ -42,14 +43,16 @@ export class UsersService {
       }
       );
     });  
+    
   }
 
   logout() {
     localStorage.removeItem('token');
     this.token = null;
+    location.reload();
   }
 
-  updateUser(id: number,data: IUser[]): Observable<Object> {
+  updateUser(id: number,data: IUser): Observable<Object> {
     return this.http.put(`${this.url}/api/auth/${id}`, data)  
   }
   deleteUser(id: number){

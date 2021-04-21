@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ITree } from 'src/models/tree.models';
 import { TreesService } from '../trees/trees.service';
 import jwt_decode from "jwt-decode";
+import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-offer-tree',
@@ -25,13 +26,13 @@ export class OfferTreeComponent implements OnInit {
   token=localStorage.getItem('token');
   tokenDecode:any;
   role:any;
-  
-  basket=sessionStorage.getItem('basket');
-  basketOBJ:any;
- 
+  total=0;
+  totalpt=0;
+
+  basketArray= new Array();
 
 
-  constructor(private treeService: TreesService, private formBuilder: FormBuilder) { 
+  constructor(private treeService: TreesService, private formBuilder: FormBuilder, private userService: UsersService) { 
     this.onetree={id: 0, name: "", price: 0, description: ""};
 
     this.addTreeForm = this.formBuilder.group({
@@ -57,11 +58,7 @@ export class OfferTreeComponent implements OnInit {
     if(this.token != null){
       this.tokenDecode = jwt_decode(this.token);
       this.role = this.tokenDecode.role; 
-    }
-
-    if(this.basket != null){
-      this.basketOBJ=JSON.parse(this.basket);
-    }
+    }    
   }
 
   displayAdd(){
@@ -146,13 +143,25 @@ export class OfferTreeComponent implements OnInit {
 
   }
   addToBasket(){
-    sessionStorage.setItem('basket',JSON.stringify(this.onetree));
-    console.log(this.onetree);
+    this.basketArray.push(this.onetree)
+    sessionStorage.setItem('basket',JSON.stringify(this.basketArray));
+    this.total+=this.onetree.price;
+    this.totalpt+=(this.onetree.price *1.2);
   }
   pay(){
-    //point=point+nombre de points total
-    //vider le panier
+    this.userService.updateUser(this.tokenDecode.id,{id:this.tokenDecode.id,firstname:this.tokenDecode.firstname,lastname:this.tokenDecode.lastname,username:this.tokenDecode.username, email:this.tokenDecode.email,
+      password:this.tokenDecode.password,tel:this.tokenDecode.tel,address:this.tokenDecode.address,birthDate:this.tokenDecode.birthDate,role:this.tokenDecode.role,points:this.tokenDecode.points+this.totalpt}).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log('Error occured:' , err);
+      }
+    );
     sessionStorage.removeItem('basket');
+  }
+  refresh(){
+    location.reload();
   }
   
 }
