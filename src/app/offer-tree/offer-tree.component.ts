@@ -26,6 +26,7 @@ export class OfferTreeComponent implements OnInit {
   token=localStorage.getItem('token');
   tokenDecode:any;
   role:any;
+  points:any;
   total=0;
   totalpt=0;
 
@@ -58,6 +59,7 @@ export class OfferTreeComponent implements OnInit {
     if(this.token != null){
       this.tokenDecode = jwt_decode(this.token);
       this.role = this.tokenDecode.role; 
+      this.points = this.tokenDecode.points;
     }    
   }
 

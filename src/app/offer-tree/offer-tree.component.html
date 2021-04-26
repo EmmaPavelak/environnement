@@ -38,6 +38,7 @@
                                                 <h3 class="nk-block-title page-title">Offrir un arbre</h3>
                                                 <div class="nk-block-des text-soft">
                                                     <p>Vous pouvez offrir un arbre à quelqu'un.</p>
+                                                    <p>Vous avez actuellement <strong>{{points}} </strong> points.</p>
                                                 </div>
                                                 <button class="btn btn-secondary"
                                                     [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }"
@@ -129,7 +130,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
 
-                    <h2 class="modal-title">{{onetree.name}}</h2>
+                    <h2 class="modal-title m-2">{{onetree.name}}</h2>
 
                     <div class="modal-body">
                         <div class="preview-icon-wrap">
