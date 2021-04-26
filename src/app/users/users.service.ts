@@ -9,10 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class UsersService {
 
-  token: any;
-  constructor(private http: HttpClient) { 
-   
-  }
+constructor(private http: HttpClient) { }
+
   url = 'http://localhost:3000';
 
   getAllUser(): Observable<Object> {
@@ -24,32 +22,28 @@ export class UsersService {
   createUser(data: IUser[]): Observable<Object> {
     return this.http.post(`${this.url}/api/auth/registration`, data)  
   }
-  /*loginUser(data: IUser[]): Observable<Object> {
-    return this.http.post(`${this.url}/api/auth/login`, data)
-  }*/
-
-  
   loginUser(data: IUser[]){
     return new Promise((resolve, reject) => { this.http.post(`${this.url}/api/auth/login`, data).subscribe(
       res => {
-        this.token= Object.values(res)[0].toString();
-        localStorage.setItem('token', this.token);    
-
-        resolve(this.token);
+        const token= Object.values(res)[0].toString();
+        localStorage.setItem('token', token);  
+  
+        resolve(token);
       },
       (error) => {
         reject(error);
       }
       );
     });  
+    
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.token = null;
+    localStorage.removeItem('token');    
+    location.reload();
   }
 
-  updateUser(id: number,data: IUser[]): Observable<Object> {
+  updateUser(id: number,data: IUser): Observable<Object> {
     return this.http.put(`${this.url}/api/auth/${id}`, data)  
   }
   deleteUser(id: number){

@@ -64,6 +64,7 @@ updateUser(){
   this.userService.updateUser(this.tokenDecode.id,this.updateForm.value).subscribe(
     res => {
       console.log(res);
+      location.reload();
     },
     err => {
       this.registerOK = false;
