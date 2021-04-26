@@ -21,47 +21,56 @@
             </div>
             <div class="nk-header-tools">
                 <ul class="nk-quick-nav">
-                    <!-- <li><a routerLink="login"><span>Se connecter</span></a></li>
-                    <li><a routerLink="registration"><span>S'inscrire</span></a> </li>-->
-
-
-                    <li class="dropdown user-dropdown"><a href="#" class="dropdown-toggle mr-lg-n1"
+                    <div *ngIf="token != null then co else notco">Le contenu saisi ici sera ignoré.</div>
+                    <ng-template #notco>
+                        <li><a routerLink="login"><span>Se connecter</span></a></li>
+                        <li><a routerLink="registration"><span>S'inscrire</span></a> </li>
+                    </ng-template>
+                    <ng-template #co>
+                        <li class="dropdown user-dropdown"><a href="#" class="dropdown-toggle mr-lg-n1"
                             data-toggle="dropdown">
                             <div class="user-toggle">
                                 <div class="user-avatar sm"><em class="icon ni ni-user-alt"></em></div>
                             </div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
-                            <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
-                                <div class="user-card">
-                                    <div class="user-avatar"><span>JD</span></div>
-                                    <div class="user-info"><span class="lead-text">John Doe</span><span
-                                            class="sub-text">
-                                            john.doe@environnement.com</span></div>
-                                    <div class="user-action"><a class="btn btn-icon mr-n2"
-                                            href="/demo4/user-profile-setting.html"><em
-                                                class="icon ni ni-setting"></em></a></div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                                <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                    <div class="user-card">
+                                        <div class="user-avatar"><span>{{user.firstname.substr(0, 1)}}{{user.lastname.substr(0, 1)}}</span></div>
+                                        <div class="user-info"><span class="lead-text">{{user.username}}</span><span
+                                                class="sub-text">{{user.email}}</span></div>
+                                        <div class="user-action"><a class="btn btn-icon mr-n2"
+                                                href="/demo4/user-profile-setting.html"><em
+                                                    class="icon ni ni-setting"></em></a></div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-inner">
+                                    <ul class="link-list">
+                                        <li><a routerLink="my-account"><em class="icon ni ni-user-alt"></em><span>Mon
+                                                    profil</span></a></li>
+                                        <li  [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }" ><a [routerLink]="['/edit-user/']"><em
+                                                    class="icon ni ni-setting-alt"></em><span>Gestion des utilisateurs</span></a>
+                                        </li>
+                                        <!--<li><a routerLink="login"><em class="icon ni ni-activity-alt"></em><span>Se
+                                                    connecter</span></a>
+                                        </li>
+                                        <li><a routerLink="registration"><em
+                                                    class="icon ni ni-activity-alt"></em><span>S'inscrire</span></a>
+                                        </li>-->
+                                    </ul>
+                                </div>
+                                <div class="dropdown-inner">
+                                    <ul class="link-list">
+                                        <li (click)="logout()"><a href="#"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="dropdown-inner">
-                                <ul class="link-list">
-                                    <li><a routerLink="my-account"><em class="icon ni ni-user-alt"></em><span>Mon
-                                                profil</span></a></li>
-                                    <li><a routerLink="login"><em class="icon ni ni-activity-alt"></em><span>Se
-                                                connecter</span></a>
-                                    </li>
-                                    <li><a routerLink="registration"><em
-                                                class="icon ni ni-activity-alt"></em><span>S'inscrire</span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="dropdown-inner">
-                                <ul class="link-list">
-                                    <li><a href="#"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    </ng-template>
+
+
+
+
                     <li class="d-lg-none"><a href="#" class="toggle nk-quick-nav-icon mr-n1" data-target="sideNav"><em
                                 class="icon ni ni-menu"></em></a></li>
                 </ul>

@@ -8,37 +8,26 @@
                 <div class="nk-content ">
                     <div class="container wide-xl">
                         <div class="nk-content-inner">
-                            <div class="nk-aside" data-content="sideNav" data-toggle-overlay="true" data-toggle-screen="lg" data-toggle-body="true">
-                                <div class="nk-sidebar-menu" data-simplebar>
-                                    <ul class="nk-menu">
-                                        <li class="nk-menu-heading">
-                                            <h6 class="overline-title text-primary-alt">Menu</h6>
-                                        </li><!-- .nk-menu-heading -->
-                                        <li class="nk-menu-item">
-                                            <a [routerLink]="['/my-account/']" class="nk-menu-link">
-                                                <span class="nk-menu-icon"><em class="icon ni ni-user-alt"></em></span>
-                                                <span class="nk-menu-text">Mes Information</span>
-                                            </a>
-                                        </li><!-- .nk-menu-item -->
-                                        <li class="nk-menu-item">
-                                            <a [routerLink]="['/offer-tree/']" class="nk-menu-link">
-                                                <span class="nk-menu-icon"><em class="icon ni ni-gift"></em></span>
-                                                <span class="nk-menu-text">Offrir un arbre</span>
-                                            </a>
-                                        </li><!-- .nk-menu-item -->
-                                        <li class="nk-menu-heading">
-                                            <h6 class="overline-title text-danger">Administration</h6>
-                                        </li><!-- .nk-menu-heading -->
-                                        <li class="nk-menu-item">
-                                            <a [routerLink]="['/edit-user/']" class="nk-menu-link text-danger">
-                                                <span class="nk-menu-icon"><em class="icon ni ni-users text-danger"></em></span>
-                                                <span class="nk-menu-text">Gestion des utilisateurs</span>
-                                            </a>
-                                        </li>
-                                    </ul><!-- .nk-menu -->
+                            <!--ASIDE HERE-->
+                            <div class="nk-aside" data-content="sideNav" data-toggle-overlay="true"
+                                data-toggle-screen="lg" data-toggle-body="true">
+                                <div class="nk-sidebar-menu card-inner bg-lighter" data-simplebar>
+                                    <h3>Mon Panier</h3>
+                                    <div class="card card-bordered">
+                                        <div class="card-inner">
+                                            <h5 class="card-title">1 x {{basketOBJ.name}}</h5>
+                                            <p>{{basketOBJ.price}} €</p>
+                                            <p>300 points rapportés</p>
+                                        </div>
+                                    </div>
+                                    <p>Total de points rapportés : <strong>300</strong> points</p>
+                                    <p>Total à payer : <strong>300</strong> euros </p>
+                                    <button class="btn btn-secondary" data-toggle="modal"
+                                    data-target="#modalAlert" (click)="pay()">Payer</button>
                                 </div><!-- .nk-sidebar-menu -->
                                 <div class="nk-aside-close">
-                                    <a href="#" class="toggle" data-target="sideNav"><em class="icon ni ni-cross"></em></a>
+                                    <a href="#" class="toggle" data-target="sideNav"><em
+                                            class="icon ni ni-cross"></em></a>
                                 </div><!-- .nk-aside-close -->
                             </div><!-- .nk-aside -->
                             <div class="nk-content-body">
@@ -50,88 +39,79 @@
                                                 <div class="nk-block-des text-soft">
                                                     <p>Vous pouvez offrir un arbre à quelqu'un.</p>
                                                 </div>
+                                                <button class="btn btn-secondary"
+                                                    [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }"
+                                                    (click)="displayAdd()">Ajouter un arbre</button>
+
+                                                <form [formGroup]="addTreeForm" (ngSubmit)="onSubmit()"
+                                                    [ngStyle]="{ display: seeAddForm ?'block' : 'none' }">
+
+                                                    <div class="form-group">
+                                                        <div class="form-label-group">
+                                                            <label class="form-label" for="default-01">Nom</label>
+                                                        </div>
+                                                        <input type="text" class="form-control form-control-lg"
+                                                            id="default-01" placeholder="Entrer le nom de l'arbre"
+                                                            formControlName="name"
+                                                            [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                                                            required>
+                                                        <div *ngIf="submitted && f.name.errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="f.name.errors.required">Nom vide</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="form-label-group">
+                                                            <label class="form-label" for="price">Prix</label>
+                                                        </div>
+                                                        <div class="form-control-wrap">
+                                                            <input type="number" class="form-control form-control-lg"
+                                                                id="price" placeholder="Entrer le prix de l'arbre"
+                                                                formControlName="price"
+                                                                [ngClass]="{ 'is-invalid': submitted && f.price.errors }"
+                                                                required>
+
+                                                            <div *ngIf="submitted && f.price.errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f.price.errors.required">Prix vide</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="form-label-group">
+                                                            <label class="form-label"
+                                                                for="default-01">Description</label>
+                                                        </div>
+                                                        <input type="text" class="form-control form-control-lg"
+                                                            id="default-01"
+                                                            placeholder="Entrer la description de l'arbre"
+                                                            formControlName="description"
+                                                            [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+                                                            required>
+                                                        <div *ngIf="submitted && f.description.errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="f.description.errors.required">Nom vide</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group"><button
+                                                            class="btn btn-lg btn-primary btn-block">Ajouter cet
+                                                            arbre</button></div>
+                                                </form>
+
                                             </div><!-- .nk-block-head-content -->
                                         </div><!-- .nk-block-between -->
                                     </div><!-- .nk-block-head -->
                                     <ul class="row g-gs preview-icon-svg">
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
+                                        <li class="col-lg-3 col-6 col-sm-4" *ngFor=" let tree of trees">
+                                            <div class="preview-icon-box card card-bordered"
+                                                (click)="getTreeById(tree.id)" data-toggle="modal"
+                                                data-target="#tree-details">
                                                 <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/palmier.png" alt="">
+                                                    <img src="../assets/tree/{{tree.name.toLowerCase()}}.png"
+                                                        alt="{{tree.name}}">
                                                 </div>
-                                                <span class="preview-icon-name">Palmier</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/sequoia.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Sequoia</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/erable.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Erable</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/arbre_triste.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Saule pleureur</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/olivier.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Olivier</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/ginkgo.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Ginkgo</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/pommier.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Pommier</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/cypres.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Cypres</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/cactus.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Cactus</span>
-                                            </div><!-- .preview-icon-box -->
-                                        </li><!-- .col -->
-                                        <li class="col-lg-3 col-6 col-sm-4">
-                                            <div class="preview-icon-box card card-bordered">
-                                                <div class="preview-icon-wrap">
-                                                    <img src="../assets/tree/weed.png" alt="">
-                                                </div>
-                                                <span class="preview-icon-name">Un gros pied d'weed</span>
+                                                <span class="preview-icon-name">{{tree.name}}</span>
                                             </div><!-- .preview-icon-box -->
                                         </li><!-- .col -->
                                     </ul>
@@ -145,5 +125,107 @@
             <!-- wrap @e -->
         </div>
         <!-- main @e -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="tree-details">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+
+                    <h2 class="modal-title">{{onetree.name}}</h2>
+
+                    <div class="modal-body">
+                        <div class="preview-icon-wrap">
+                            <img src="../assets/tree/{{onetree.name.toLowerCase()}}.png" alt="palmier">
+                        </div>
+                        <p [ngStyle]="{ display: seeEditForm ?'none' : 'block' }">Prix : {{onetree.price}}</p>
+                        <p [ngStyle]="{ display: seeEditForm ?'none' : 'block' }">{{onetree.description}}</p>
+
+
+                        <form [formGroup]="updateTreeForm" (ngSubmit)="editTree()"
+                            [ngStyle]="{ display: seeEditForm ?'block' : 'none' }">
+
+                            <input type="hidden" class="form-control" formControlName="id" [(ngModel)]="onetree.id">
+
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <label class="form-label" for="default-01">Nom</label>
+                                </div>
+                                <input type="text" class="form-control form-control-lg" id="default-01"
+                                    placeholder="Entrer le nom de l'arbre" formControlName="name"
+                                    [(ngModel)]="onetree.name"
+                                    [ngClass]="{ 'is-invalid': submittedEdit && fe.name.errors }" required>
+                                <div *ngIf="submittedEdit && fe.name.errors" class="invalid-feedback">
+                                    <div *ngIf="fe.name.errors.required">Nom vide</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <label class="form-label" for="price">Prix</label>
+                                </div>
+                                <div class="form-control-wrap">
+                                    <input type="number" class="form-control form-control-lg" id="price"
+                                        [(ngModel)]="onetree.price" placeholder="Entrer le prix de l'arbre"
+                                        formControlName="price"
+                                        [ngClass]="{ 'is-invalid': submittedEdit && fe.price.errors }" required>
+
+                                    <div *ngIf="submittedEdit && fe.price.errors" class="invalid-feedback">
+                                        <div *ngIf="fe.price.errors.required">Prix vide</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <label class="form-label" for="default-01">Description</label>
+                                </div>
+                                <input type="text" class="form-control form-control-lg" id="default-01"
+                                    placeholder="Entrer la description de l'arbre" formControlName="description"
+                                    [(ngModel)]="onetree.description"
+                                    [ngClass]="{ 'is-invalid': submittedEdit && fe.description.errors }" required>
+                                <div *ngIf="submittedEdit && fe.description.errors" class="invalid-feedback">
+                                    <div *ngIf="fe.description.errors.required">Nom vide</div>
+                                </div>
+                            </div>
+                            <div class="form-group"><button class="btn btn-lg btn-primary btn-block">Editer cet
+                                    arbre</button></div>
+                        </form>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button class="btn btn-primary"  (click)="addToBasket()" >Offrir cet arbre</button>
+                        <button class="btn btn-secondary"
+                            [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }"
+                            (click)="displayEdit()">Editer</button>
+                        <button class="btn btn-danger" [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }"
+                            (click)="deleteTree(onetree.id)">Supprimer cet arbre</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--FIN MODAL TREE-->   
+         
+        <div class="modal fade" tabindex="-1" id="modalAlert" aria-modal="true" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content"><a href="#" class="close" data-dismiss="modal"><em
+                            class="icon ni ni-cross"></em></a>
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal"><em
+                                class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-check bg-success"></em>
+                            <h4 class="nk-modal-title">Felicitations !</h4>
+                            <div class="nk-modal-text">
+                                <div class="caption-text">Vous avez offert <strong>2</strong> arbres de type
+                                    <strong>Palmier</strong> </div><span class="sub-text-sm">Vous avez aidé la planète et pour cela vous avez reçu 300 points.
+                                         <a routerLink="my-account">Voir votre profil</a></span>
+                            </div>
+                            <div class="nk-modal-action"><a href="#" class="btn btn-lg btn-mw btn-primary"
+                                    data-dismiss="modal">OK</a></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-lighter">
+                        <div class="text-center w-100">
+                            <p>Chaque arbre planté aide au rééquilibrage du climat !</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>

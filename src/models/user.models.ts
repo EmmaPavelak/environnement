@@ -5,4 +5,9 @@ export interface IUser {
     username:string;
     email:string;
     password:string;
+    tel:number;
+    address:string;
+    birthDate:Date;
+    points:number;
+    role:string;
 }
