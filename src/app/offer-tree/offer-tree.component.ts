@@ -28,7 +28,8 @@ export class OfferTreeComponent implements OnInit {
   role:any;
   total=0;
   totalpt=0;
-
+  user:any;
+  id:number=0;
   basketArray= new Array();
 
 
@@ -57,10 +58,18 @@ export class OfferTreeComponent implements OnInit {
 
     if(this.token != null){
       this.tokenDecode = jwt_decode(this.token);
+      this.id=this.tokenDecode.id;
       this.role = this.tokenDecode.role; 
-    }    
+     
+    } 
+    this.getUserById(this.id); 
   }
 
+  getUserById(id: number){
+    this.userService.getUserByID(id).subscribe(data => {
+      this.user = data;  
+      });  
+  }
   displayAdd(){
     this.seeAddForm= true;
   }
@@ -138,7 +147,6 @@ export class OfferTreeComponent implements OnInit {
   }
     console.warn('Your order has been submitted', this.addTreeForm.value);
     this.saveTree();
-     this.addTreeForm.reset();
      location.reload();
 
   }

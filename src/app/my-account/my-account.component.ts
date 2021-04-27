@@ -29,7 +29,8 @@ export class MyAccountComponent implements OnInit {
       lastname: "",
       password: "",
       tel: 0,
-      username: ""}
+      username: "",
+      points: 0}
       
     this.updateForm = this.formBuilder.group({
       id: ['', Validators.required],
