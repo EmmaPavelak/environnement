@@ -38,14 +38,14 @@
                                                 <h3 class="nk-block-title page-title">Offrir un arbre</h3>
                                                 <div class="nk-block-des text-soft">
                                                     <p>Vous pouvez offrir un arbre à quelqu'un.</p>
-                                                    <p>Vous avez actuellement <strong>{{points}} </strong> points.</p>
+                                                    <p *ngIf="token != null">Vous avez actuellement <strong>{{user.points}} </strong> points.</p>
                                                 </div>
                                                 <button class="btn btn-secondary"
                                                     [ngStyle]="{ display: role=='Administrateur' ?'block' : 'none' }"
                                                     (click)="displayAdd()">Ajouter un arbre</button>
 
-                                                <form [formGroup]="addTreeForm" (ngSubmit)="onSubmit()"
-                                                    [ngStyle]="{ display: seeAddForm ?'block' : 'none' }">
+                                                <form id="addTreeForm" [formGroup]="addTreeForm" (ngSubmit)="onSubmit()"
+                                                    [ngStyle]="{ display: seeAddForm ?'flex' : 'none' }">
 
                                                     <div class="form-group">
                                                         <div class="form-label-group">
@@ -136,9 +136,10 @@
                         <div class="preview-icon-wrap">
                             <img src="../assets/tree/{{onetree.name.toLowerCase()}}.png" alt="palmier">
                         </div>
+                        <p id="description"[ngStyle]="{ display: seeEditForm ?'none' : 'flex' }">{{onetree.description}}</p>
                         <p [ngStyle]="{ display: seeEditForm ?'none' : 'block' }">Prix : {{onetree.price}}</p>
                         <p [ngStyle]="{ display: seeEditForm ?'none' : 'block' }">Points rapportés : {{onetree.price*1.2}}</p>
-                        <p [ngStyle]="{ display: seeEditForm ?'none' : 'block' }">{{onetree.description}}</p>
+                        
 
 
                         <form [formGroup]="updateTreeForm" (ngSubmit)="editTree()"
